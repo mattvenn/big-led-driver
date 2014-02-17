@@ -25,17 +25,18 @@ GPIO.output(le,False)
 GPIO.output(clk,False)
 
 digits = [
- [ 1,1,1,1,1,1,0 ], # 0
- [ 0,1,1,0,0,0,0 ], # 1
- [ 1,1,0,1,1,0,1 ], # 2
- [ 1,1,1,1,0,0,1 ], # 3
- [ 0,1,1,0,0,1,1 ], # 4
- [ 1,0,1,1,0,1,1 ], # 5
- [ 0,0,1,1,1,1,1 ], # 6
- [ 1,1,1,0,0,0,0 ], # 7
- [ 1,1,1,1,1,1,1 ], # 8
- [ 1,1,1,0,0,1,1 ], # 9
+ [ 1,1,1,1,1,1,0,0 ], # 0
+ [ 0,1,1,0,0,0,0,0 ], # 1
+ [ 1,1,0,1,1,0,1,0 ], # 2
+ [ 1,1,1,1,0,0,1,0 ], # 3
+ [ 0,1,1,0,0,1,1,0 ], # 4
+ [ 1,0,1,1,0,1,1,0 ], # 5
+ [ 0,0,1,1,1,1,1,0 ], # 6
+ [ 1,1,1,0,0,0,0,0 ], # 7
+ [ 1,1,1,1,1,1,1,0 ], # 8
+ [ 1,1,1,0,0,1,1,0 ], # 9
 ]
+"""
 digits = [
  [ 1,0,0,0,0,0,0,0 ], # 0
  [ 0,1,0,0,0,0,0,0 ], # 0
@@ -46,37 +47,43 @@ digits = [
  [ 0,0,0,0,0,0,1,0 ], # 0
  [ 0,0,0,0,0,0,0,1 ], # 0
 ]
+"""
 def send_digit(digit,point=False):
     GPIO.output(not_oe, True)
 
-    print("sending:", digits[digit])
+    if point:
+        digits[digit][7] = 1
+    else:
+        digits[digit][7] = 0
+    print("sending:", digit, " = ", digits[digit])
 
     #next 7 clock pulses
     for i in range(8):
         GPIO.output(clk,False)
-#        time.sleep(0.01)
         #data
-        if digits[digit][i]:
+        if digits[digit][7-i]:
             GPIO.output(sdo,True)
         else:
             GPIO.output(sdo,False)
 
         GPIO.output(clk,True)
-#        time.sleep(0.01)
 
 
     GPIO.output(clk,True)
-#    time.sleep(0.01)
 
     #latch
     GPIO.output(le,True)
-#    time.sleep(0.01)
     GPIO.output(le,False)
 
     #turn on leds
     GPIO.output(not_oe, False)
 
+point = False
 while True:
-    for i in range(8):
-        send_digit(i,False)
-        time.sleep(0.1)
+    for i in range(10):
+        send_digit(i,point)
+        time.sleep(1.5)
+    if point:
+        point = False
+    else:
+        point = True
