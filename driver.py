@@ -54,7 +54,7 @@ digits = [
 #sends a string representation of a float, deals with floating points
 def update(number):
     #turn leds off before update
-    turn_off()
+#    turn_off()
     point = False
 
     #send least significant digit first
@@ -71,7 +71,7 @@ def update(number):
         GPIO.output(le,False)
     
     #turn on leds
-    turn_on()
+#    turn_on()
 
 #send a number, with optional point
 def send_digit(digit,point=False):
@@ -114,8 +114,9 @@ def turn_on():
 if __name__ == '__main__':
     print("running test sequence")
     point = False
+    turn_on()
     while True:
         for i in range(100):
-            print("sending %.2f" % (i/100.0))
-            time.sleep(0.05)
-            update("%.2f" % (i/100.0))
+            print("sending %.1f" % (i/10.0))
+            time.sleep(0.10)
+            update("%02d" % (i))
