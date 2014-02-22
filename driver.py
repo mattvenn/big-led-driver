@@ -8,6 +8,9 @@ import time
 #verbose output
 verbose = True
 
+#how long to wait before next char sent
+scroll_time = 0.3
+
 #undefine for testing with GPIO lib
 raspi = True
 
@@ -52,23 +55,39 @@ digits = [
 ]
 
 #sends a string representation of a float, deals with floating points
-def update(number):
+def update(number,scroll=False):
     #turn leds off before update
 #    turn_off()
     point = False
+    
+    if scroll:
+        for char in number:
+            if char == '.':
+                point = True
+                continue
+            send_digit(int(char),point)
+            point = False
 
-    #send least significant digit first
-    for char in reversed(number):
-        if char == '.':
-            point = True
-            continue
-        send_digit(int(char),point)
-        point = False
+            #latch the outputs
+            if raspi:
+                GPIO.output(le,True)
+                GPIO.output(le,False)
 
-    #latch the outputs
-    if raspi:
-        GPIO.output(le,True)
-        GPIO.output(le,False)
+            time.sleep(scroll_time)
+
+    else:
+        #send least significant digit first
+        for char in reversed(number):
+            if char == '.':
+                point = True
+                continue
+            send_digit(int(char),point)
+            point = False
+
+        #latch the outputs
+        if raspi:
+            GPIO.output(le,True)
+            GPIO.output(le,False)
     
     #turn on leds
 #    turn_on()
@@ -110,11 +129,21 @@ def turn_on():
     if raspi:
         GPIO.output(not_oe, False)
 
+def init_pwm():
+    p = GPIO.PWM(led_pin, 50)
+    p.start(1)
+    return p
+
+def set_pwm(p,pwm):
+    p.ChangeDutyCycle(pwm)
+
 #run a test sequence
 if __name__ == '__main__':
     print("running test sequence")
     point = False
-    turn_on()
+#    turn_on()
+    p = init_pwm()
+    set_pwm(p,50)
     while True:
         for i in range(100):
             print("sending %.1f" % (i/10.0))
