@@ -9,7 +9,8 @@ import time
 verbose = True
 
 #how long to wait before next char sent
-scroll_time = 0.3
+scroll_time = 1.0
+BLANK = 10
 
 #undefine for testing with GPIO lib
 raspi = True
@@ -52,6 +53,7 @@ digits = [
  [ 1,1,1,0,0,0,0,0 ], # 7
  [ 1,1,1,1,1,1,1,0 ], # 8
  [ 1,1,1,0,0,1,1,0 ], # 9
+ [ 0,0,0,0,0,0,0,0 ], # all off
 ]
 
 #sends a string representation of a float, deals with floating points
@@ -63,10 +65,9 @@ def update(number,scroll=False):
     if scroll:
         for char in number:
             if char == '.':
-                point = True
-                continue
-            send_digit(int(char),point)
-            point = False
+                send_digit(BLANK,True)
+            else:
+                send_digit(int(char),False)
 
             #latch the outputs
             if raspi:
@@ -130,7 +131,7 @@ def turn_on():
         GPIO.output(not_oe, False)
 
 def init_pwm():
-    p = GPIO.PWM(led_pin, 50)
+    p = GPIO.PWM(not_oe, 50)
     p.start(1)
     return p
 
