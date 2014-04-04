@@ -40,6 +40,8 @@ Also available at a higher price from [OSH park](http://oshpark.com/shared_proje
 * G is bit 6
 * Decimal point is bit 7 (gets clocked in last)
 
+So `[ 1,1,1,1,1,1,0,0 ]` would be 0 with no decimal point.
+
 ## The driver chip: TLC5916
 
 [Datasheet](http://www.ti.com/lit/ds/symlink/tlc5916.pdf) Overview
