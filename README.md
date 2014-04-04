@@ -69,6 +69,6 @@ And 22 10mm LEDs of your choice.
 
 ## Notes
 
-1/- The resistor is 1k, the silkscreen says 760R, but 1k works well at 12v supply. The lower the value the higher the current provided to the leds. See page 18 of the [Datasheet](http://www.ti.com/lit/ds/symlink/tlc5916.pdf) 
-2/- For cost reasons, the caps in the above list are sold in 10s only.
-3/- For cost reasons, the header above will do 4 boards with a few left over.
+1. The resistor is 1k, the silkscreen says 760R, but 1k works well at 12v supply. The lower the value the higher the current provided to the leds. See page 18 of the [Datasheet](http://www.ti.com/lit/ds/symlink/tlc5916.pdf) 
+2. For cost reasons, the caps in the above list are sold in 10s only.
+3. For cost reasons, the header above will do 4 boards with a few left over.
