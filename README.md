@@ -25,7 +25,7 @@ Also available at a higher price from [OSH park](http://oshpark.com/shared_proje
 
 1. Ground (0v).
 2. Ground (0v).
-3. +5v - The supply for the driver chip. This can be from 3.3v to 5v. It should be the same level as the logic levels of your controller.
+3. +5v - The supply for the driver chip. This can be from 3.3v to 5v. It should be the same level as the logic levels of your controller. So for a Raspberry Pi which operates at 3.3v it should be connected to 3.3v.
 4. +12v - The supply for the LEDs. Maximum 20V. Current is set with R1 (see notes below)
 5. SDI/SDO - Serial Data In on the left of the board and Out on the right of the board (for chaining)
 6. CLK - Clock
