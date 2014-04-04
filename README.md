@@ -1,15 +1,64 @@
-# Big 7 segment driver
+# Big 7 segment display boards
 
-Raspberry Pi Python driver for the [TLC5916](http://www.ti.com/product/tlc5916), a constant current, 8 bit driver, designed for daisy chaining.
+PCBs and Python driver for Raspberry Pi.
+
+Uses the [TLC5916](http://www.ti.com/product/tlc5916), a constant current, 8 bit driver, designed for daisy chaining.
 
 Check the video of it [in action on youtube](http://youtu.be/0-mJzARANds)
 
 # PCB
 
-Available from [OSH park](http://oshpark.com/shared_projects/hZyNfTTa), hopefully will find a way to make them cheaper soon!
+Available from £6.50 from [me](http://www.mattvenn.net/2014/02/25/big-7-segment-display-pcb/).
 
-# Example
+Also available at a higher price from [OSH park](http://oshpark.com/shared_projects/hZyNfTTa), hopefully will find a way to make them cheaper soon!
+
+# Python Example
 
     import driver
     driver.update("0.35") #requires 3 panels
 
+# Electronics
+
+*Important* Please read and understand the power supply pins below before connecting your board to a controller.
+
+## Pins
+
+1 Ground (0v).
+2 Ground (0v).
+3 +5v - The supply for the driver chip. This can be from 3.3v to 5v. It should be the same level as the logic levels of your controller.
+4 +12v - The supply for the LEDs. Maximum 20V. Current is set with R1 (see notes below)
+5 SDI/SDO - Serial Data In on the left of the board and Out on the right of the board (for chaining)
+6 CLK - Clock
+7 LE - Latch Enable - the shift register is latched to the output when this is pulsed.
+8 !OE - Not Output Enable. Pulled up to the logic supply by a 500k resistor  in the chip. Pull low to turn on the LEDs. Useful for PWM control of brightness.
+
+## The driver chip: TLC5916
+
+[Datasheet](http://www.ti.com/lit/ds/symlink/tlc5916.pdf) Overview
+
+* 3.3v to 5v supply
+* up to 120mA per channel
+* Max LED voltage 20v
+
+## Required Components - BOM
+
+The long digit in the following list are Farnell order numbers
+
+* R1: 2329486, 1, RESISTOR CARBON  1K0 0.25W 
+* C5: 2112910, 1, CAP CER Y5V 1UF 50V RAD 
+* C4: 1870987, 1, CAP ALU ELEC 22UF 6.3V RAD 
+* C2: 1871001, 1, CAP ALU ELEC 220UF 16V RAD 
+* IC1: 1647814, 1, IC LED DRIVER 8CH PDIP16
+
+And 22 10mm LEDs of your choice.
+
+## Optional Components
+
+* 1101347, 1, SOCKET IC DIL 0.3" 16WAY 
+* 1097954, 1, HEADER PIN TIN 36WAY 1ROW 
+
+## Notes
+
+1/- The resistor is 1k, the silkscreen says 760R, but 1k works well at 12v supply. The lower the value the higher the current provided to the leds. See page 18 of the [Datasheet](http://www.ti.com/lit/ds/symlink/tlc5916.pdf) 
+2/- For cost reasons, the caps in the above list are sold in 10s only.
+3/- For cost reasons, the header above will do 4 boards with a few left over.
