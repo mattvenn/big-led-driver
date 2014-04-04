@@ -28,9 +28,17 @@ Also available at a higher price from [OSH park](http://oshpark.com/shared_proje
 3. +5v - The supply for the driver chip. This can be from 3.3v to 5v. It should be the same level as the logic levels of your controller. So for a Raspberry Pi which operates at 3.3v it should be connected to 3.3v.
 4. +12v - The supply for the LEDs. Maximum 20V. Current is set with R1 (see notes below)
 5. SDI/SDO - Serial Data In on the left of the board and Out on the right of the board (for chaining)
-6. CLK - Clock
-7. LE - Latch Enable - the shift register is latched to the output when this is pulsed.
+6. CLK - Clock. Next bit gets shifted when clock goes high.
+7. LE - Latch Enable - the shift register is latched to the output when this is transitions from high to low.
 8. !OE - Not Output Enable. Pulled up to the logic supply by a 500k resistor  in the chip. Pull low to turn on the LEDs. Useful for PWM control of brightness.
+
+## LED arrangement
+
+![Segments](7seg.gif)
+
+* A is bit 0 (gets clocked in first)
+* G is bit 6
+* Decimal point is bit 7 (gets clocked in last)
 
 ## The driver chip: TLC5916
 
