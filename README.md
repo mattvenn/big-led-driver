@@ -23,14 +23,14 @@ Also available at a higher price from [OSH park](http://oshpark.com/shared_proje
 
 ## Pins
 
-1 Ground (0v).
-2 Ground (0v).
-3 +5v - The supply for the driver chip. This can be from 3.3v to 5v. It should be the same level as the logic levels of your controller.
-4 +12v - The supply for the LEDs. Maximum 20V. Current is set with R1 (see notes below)
-5 SDI/SDO - Serial Data In on the left of the board and Out on the right of the board (for chaining)
-6 CLK - Clock
-7 LE - Latch Enable - the shift register is latched to the output when this is pulsed.
-8 !OE - Not Output Enable. Pulled up to the logic supply by a 500k resistor  in the chip. Pull low to turn on the LEDs. Useful for PWM control of brightness.
+1. Ground (0v).
+2. Ground (0v).
+3. +5v - The supply for the driver chip. This can be from 3.3v to 5v. It should be the same level as the logic levels of your controller.
+4. +12v - The supply for the LEDs. Maximum 20V. Current is set with R1 (see notes below)
+5. SDI/SDO - Serial Data In on the left of the board and Out on the right of the board (for chaining)
+6. CLK - Clock
+7. LE - Latch Enable - the shift register is latched to the output when this is pulsed.
+8. !OE - Not Output Enable. Pulled up to the logic supply by a 500k resistor  in the chip. Pull low to turn on the LEDs. Useful for PWM control of brightness.
 
 ## The driver chip: TLC5916
 
