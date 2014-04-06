@@ -72,3 +72,9 @@ And 22 10mm LEDs of your choice.
 1. R1 sets the LED current. 1k works well at 12v supply. The lower the value the higher the current provided to the leds. See page 18 of the [Datasheet](http://www.ti.com/lit/ds/symlink/tlc5916.pdf) 
 2. For cost reasons, the caps in the above list are sold in 10s only.
 3. For cost reasons, the header above will do 4 boards with a few left over.
+
+## Characteristics
+
+* with LEDs from [oomlout](http://oomlout.com) and a 1k current resistor, average current while counting is 120mA, all segments on is 200mA.
+* current sourced from !OE is 22uA.
+* current drawn by 5v line (logic supply) is 10mA.
